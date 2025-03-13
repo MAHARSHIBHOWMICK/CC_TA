@@ -5,29 +5,34 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'g++ hello.cpp -o hello'
+                    echo 'Building C++ Project...'
+                    sh 'g++ -o pes2ug22cs907-1 hello.cpp'  // Replace with your actual file
                 }
             }
         }
-        
+
         stage('Test') {
             steps {
                 script {
-                    sh './hello'
+                    echo 'Running Tests...'
+                    sh './pes2ug22cs907-1'  // Execute compiled file
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying Application...'
+                script {
+                    echo 'Deploying the application...'
+                    sh 'echo "Deployment successful!"'
+                }
             }
         }
     }
 
     post {
         failure {
-            echo 'Pipeline Failed'
+            echo 'Pipeline failed! Please check the logs for errors.'
         }
     }
 }
